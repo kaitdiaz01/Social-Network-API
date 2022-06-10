@@ -21,8 +21,6 @@ const userController = {
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
       .select("-_v")
-      .populate("friends")
-      .populate("thoguhts")
       .then((userData) => {
         if (!userData) {
           return res.status(404).json({ message: "No user with this id!" });
@@ -44,7 +42,7 @@ const userController = {
   updateUser(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $Set: { user: req.body } },
+      { $set: req.body },
       { runValidators: true, new: true }
     )
       .then((userData) => res.json(userData))
@@ -78,7 +76,7 @@ const userController = {
     console.log(req.body);
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $addToSet: { friends: req.params.friendId } },
+      { $set: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
       .then((userData) =>
