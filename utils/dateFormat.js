@@ -1,8 +1,5 @@
-const addDate = date => {
-    let dateString = date.toString();
+const addDate = (date) => {
+  let dateString = date.toString();
 
-    const lastCharacter = dateString.characterAt(dateString.length -1);
-
-
-}
-
+  const lastCharacter = dateString.characterAt(dateString.length - 1);
+};
